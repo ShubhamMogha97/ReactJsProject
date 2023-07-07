@@ -1,47 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//<div id ="parent">
-//  <div id ="child">
-//       <h1>Hello Heading 1</h1>
-//        <h2>Hello Heading 1</h2>
-//  </div>
-//</div>
+// const heading = React.createElement("h1", {}, "Hello Heading");
 
-// OR
+// React Element
+// JSX-- is not HTML in JS (we can say that HTML syntax and it is more closer to XML)
 
-//</div id="parent">
-
-//  <div id ="child1">
-//    <h1>Hello Heading 1</h1>
-//      <h2>Hello Heading 1</h2>
-//  </div>
-// <div id="child2">
-// <h1>Hello World1</h1>
-// <h2>Hello World2</h2>
-// </div>
-//</div>
-
-// How to create this structure in React JS
-
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child1" }, [
-    React.createElement("h1", {}, "I am H1 tag"),
-    React.createElement("h2", {}, "I am H2 tag"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I am H1 tag"),
-    React.createElement("h2", {}, "I am H2 tags"),
-  ]),
-]);
-
-const heading = React.createElement(
-  "h1",
-  { id: "heading" },
-  "Hello World using React JS"
+// const jSxHeading = (<h1>Hello JSX Heading</h1>);
+// Multiple line we have to use Brackets
+const jSxHeading = (
+<h1>Hello JSX Heading</h1>
 );
 
-//This is called JSX
+console.log(jSxHeading)
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+
+root.render(jSxHeading);
