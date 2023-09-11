@@ -1,6 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 // import resList from "../utils/mockData";
 
 const Body = () => {
@@ -8,10 +11,10 @@ const Body = () => {
   // Introduction to hook
 
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
-  const [filterRestaurant,setFilterRestaurant] = useState([]);
+  const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState([]); //state representing the search text of the input field
-  
-  console.log("Body Rendered");
+
+  // console.log("Body Rendered");
 
   useEffect(() => {
     // console.log("use Effect called");
@@ -28,7 +31,7 @@ const Body = () => {
       jsonData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
     setListOfRestaurant(checkData);
-    setFilterRestaurant(checkData) // optional chaining in Java Script
+    setFilterRestaurant(checkData); // optional chaining in Java Script
   };
 
   // Conditional Rendering
@@ -36,7 +39,10 @@ const Body = () => {
   // if(listOfRestaurants?.length === 0){
   //   return <Shimmer/>
   // }
+  const onlineStatus = useOnlineStatus();
 
+  if (onlineStatus === false)
+    return <h1>You are offline check your internet connection</h1>;
   return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
@@ -54,7 +60,9 @@ const Body = () => {
           <button
             onClick={() => {
               const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+                res?.info?.name
+                  ?.toLowerCase()
+                  .includes(searchText.toLowerCase())
               );
               // console.log("filteredList------",filteredList );
               setFilterRestaurant(filteredRestaurant);
@@ -80,7 +88,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filterRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+          <Link
+            key={restaurant?.info?.id}
+            to={"/restaurants/" + restaurant?.info?.id}
+          >
+            <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

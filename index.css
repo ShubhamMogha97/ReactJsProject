@@ -66,3 +66,18 @@
   padding: 10px;
   margin: 2px;
 }
+.resList{
+  width: 100%;
+  background-color: #f0f0f0;
+}
+.resName{
+  color: red;
+}
+.cuisineName{
+  color: green;
+  font-size: 20px;
+}
+.user-card{
+  padding: 10px;
+  border: 1px solid black;
+}
